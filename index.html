@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Contribution Graph Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>GitHub Contribution Graph Generator</h1>
+            <p class="subtitle">Visualize and generate scripts to test Git timestamp behavior.</p>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="yearInput">Year:</label>
+                <select id="yearInput"></select>
+            </div>
+            <div class="legend-text">
+                Click grid to cycle commits: 0 (Empty) -> 1 -> 2 -> 3 -> 4 (Darkest)
+            </div>
+        </div>
+
+        <div class="heatmap-wrapper">
+            <div class="heatmap-content">
+                <div class="months-row">
+                    <div class="empty-corner"></div>
+                    <div class="months-container" id="monthsContainer"></div>
+                </div>
+                
+                <div class="bottom-row">
+                    <div class="days-labels">
+                        <span style="grid-row: 2;">Mon</span>
+                        <span style="grid-row: 4;">Wed</span>
+                        <span style="grid-row: 6;">Fri</span>
+                    </div>
+                    <div class="heatmap" id="heatmap"></div>
+                </div>
+            </div>
+        </div>
+
+        <button id="generateBtn">Generate Git Commit Commands</button>
+
+        <div class="output-container">
+            <div class="output-header">
+                <h2>Generated Bash Script</h2>
+                <button id="copyBtn" style="display:none;">Copy to Clipboard</button>
+            </div>
+            <textarea id="output" readonly placeholder="Click 'Generate' to view the optimized bash script..."></textarea>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
