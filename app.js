@@ -55,20 +55,44 @@ document.addEventListener('DOMContentLoaded', () => {
             const dateStr = formatDate(d);
             const month = d.getMonth();
             
-            if (month !== lastMonth) {
+            // --- 替换开始：全新的月份标签居中算法 ---
+            let lastEndCol = -1;
+            const oneDay = 24 * 60 * 60 * 1000;
+
+            // 直接遍历 12 个月，精准计算每个月的起止位置
+            for (let m = 0; m < 12; m++) {
+                const firstDayOfMonth = new Date(year, m, 1);
+                const lastDayOfMonth = new Date(year, m + 1, 0);
+                
+                const firstDayOffset = Math.round((firstDayOfMonth - startDate) / oneDay);
+                const lastDayOffset = Math.round((lastDayOfMonth - startDate) / oneDay);
+                
+                // 计算这个月第一天和最后一天所在的列（0索引）
+                let startCol = Math.floor((startDayOfWeek + firstDayOffset) / 7);
+                let endCol = Math.floor((startDayOfWeek + lastDayOffset) / 7);
+                
+                // 如果这个月的第一列和上个月的最后列重叠（比如某个月只有 4 周），则顺延一列防止文字重叠
+                if (startCol <= lastEndCol) {
+                    startCol = lastEndCol + 1;
+                }
+                // 如果顺延后超出了该月实际范围，强行覆盖
+                if (startCol > endCol) {
+                    endCol = startCol;
+                }
+                
+                const span = endCol - startCol + 1; // 这个月跨了多少列
+                const leftPos = startCol * (cellSize + cellGap); // 左侧起点像素
+                const width = span * (cellSize + cellGap) - cellGap; // 总宽度
+                
                 const label = document.createElement('div');
                 label.className = 'month-label';
-                label.textContent = monthNames[month];
-                
-                const dayOffset = Math.round((d - startDate) / oneDay);
-                const weekIndex = Math.floor((startDayOfWeek + dayOffset) / 7);
-                const leftPos = weekIndex * (cellSize + cellGap);
+                label.textContent = monthNames[m];
                 label.style.left = `${leftPos}px`;
+                label.style.width = `${width}px`; // 让标签宽度撑满这一个月
                 
                 monthsContainer.appendChild(label);
-                lastMonth = month;
+                lastEndCol = endCol;
             }
-
             const dayEl = document.createElement('div');
             const count = commitData[dateStr] || 0;
             
