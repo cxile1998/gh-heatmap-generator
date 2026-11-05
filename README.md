@@ -1,3 +1,5 @@
+🌐 Language: **English** | [中文](README.zh.md)
+
 # GitHub Contribution Graph Simulator
 
 An educational, open-source web tool designed to study and visually simulate the GitHub contribution graph. 
