@@ -2,25 +2,19 @@
 
 # GitHub 贡献图模拟器
 
-https://github.com/kyshipit/gh-heatmap-generator#github-contribution-graph-simulator
-
 一个用于学习和可视化模拟 GitHub 贡献图的、教育性开源 Web 工具。
 
-## ⚠️ 免责声明
+## 使用声明
 
-[https://github.com/kyshipit/gh-heatmap-generator#%EF%B8%8F-disclaimer](https://github.com/kyshipit/gh-heatmap-generator#️-disclaimer)
+- 本项目仅用于教育和研究目的。
 
-本项目仅用于教育和研究目的。
+- 本工具的主要目标是帮助开发者理解 GitHub 计算和显示贡献热力图（例如如何处理 AuthorDate、CommitDate、时区和空提交）的底层机制。
 
-本工具的主要目标是帮助开发者理解 GitHub 计算和显示贡献热力图（例如如何处理 AuthorDate、CommitDate、时区和空提交）的底层机制。
+- 我们不鼓励也不支持使用本工具伪造虚假简历、误导雇主或人为夸大开发者的声誉。
 
-我们不鼓励也不支持使用本工具伪造虚假简历、误导雇主或人为夸大开发者的声誉。
+- 使用本工具即表示你同意：你对自己的使用行为承担全部责任。我们公开邀请 GitHub 安全与工程团队审查本项目，并在其认为必要时修补其贡献计算逻辑中的任何底层漏洞。
 
-使用本工具即表示你同意：你对自己的使用行为承担全部责任。我们公开邀请 GitHub 安全与工程团队审查本项目，并在其认为必要时修补其贡献计算逻辑中的任何底层漏洞。
-
-## 📖 背景：为什么伪造提交会失败？
-
-https://github.com/kyshipit/gh-heatmap-generator#-background-why-do-fake-commits-fail
+## 假提交无效
 
 许多开发者尝试使用类似 `git commit --date="..."` 的简单脚本来生成虚假的贡献图。然而，这些提交通常无法在他人可见的公开贡献图上显示。本工具针对三个主要失败点进行处理：
 
@@ -28,9 +22,7 @@ https://github.com/kyshipit/gh-heatmap-generator#-background-why-do-fake-commits
 - **时区偏移**：指定日期时不带时间（或默认使用 `00:00:00`）可能会因 UTC 偏移计算而把贡献块移到前一天或后一天。
 - **双时间戳**：Git 同时维护 AuthorDate 和 CommitDate。如果二者不同步，GitHub 的公共缓存系统可能会忽略历史日期。
 
-## 🛠️ 功能
-
-[https://github.com/kyshipit/gh-heatmap-generator#%EF%B8%8F-features](https://github.com/kyshipit/gh-heatmap-generator#️-features)
+## 功能
 
 - **可视化界面**：点击 7x53 网格来绘制你的贡献图。
 - **准确的月份对齐**：实时渲染与周次完美对齐的月份标签。
@@ -38,9 +30,7 @@ https://github.com/kyshipit/gh-heatmap-generator#-background-why-do-fake-commits
 - **时区安全**：在生成的日期中硬编码 `T12:00:00`，以绕过 UTC 边界问题。
 - **真实差异**：生成会修改占位文件 `activity.txt` 的脚本，以确保提交被视为“真实”贡献。
 
-## 🚀 如何使用
-
-https://github.com/kyshipit/gh-heatmap-generator#-how-to-use
+## 如何使用
 
 1. 克隆本仓库或下载源文件（`index.html`、`style.css`、`app.js`）。
 
@@ -61,14 +51,10 @@ bash script.sh
 git push origin main
 ```
 
-## 🤝 贡献
-
-https://github.com/kyshipit/gh-heatmap-generator#-contributing
+## 贡献
 
 欢迎贡献、提交 Issue 和功能请求！如果你发现 bug 或有改进该工具的想法，欢迎随时提交 Issue 或 Pull Request。
 
-## 📄 许可证
-
-https://github.com/kyshipit/gh-heatmap-generator#-license
+## 许可证
 
 本项目采用 https://choosealicense.com/licenses/mit/ 许可证授权。
