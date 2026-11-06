@@ -1,37 +1,77 @@
+/* =========================================
+   1. 默认模式：浅色 (GitHub Light)
+   ========================================= */
 :root {
-    --bg-color: #0d1117;
-    --panel-bg: #161b22;
-    --border-color: #30363d;
-    --text-color: #c9d1d9;
-    --accent-color: #58a6ff;
-    --btn-bg: #238636;
-    --btn-hover: #2ea043;
+    --bg-color: #ffffff;
+    --panel-bg: #f6f8fa;
+    --border-color: #d0d7de;
+    --text-color: #24292f;
+    --subtitle-color: #57606a;
+    --accent-color: #0969da;
+    --btn-bg: #2da44e;
+    --btn-hover: #2c974b;
     
-    --l0: #161b22;
-    --l1: #0e4429;
-    --l2: #006d32;
-    --l3: #26a641;
-    --l4: #39d353;
+    /* 浅色格子 */
+    --l0: #ebedf0;
+    --l1: #9be9a8;
+    --l2: #40c463;
+    --l3: #30a14e;
+    --l4: #216e39;
     
-    --cell-size: 14px;
-    --cell-gap: 3px;
-    --label-width: 40px;
+    --cell-size: 15px;
+    --cell-gap: 4px;
+    --label-width: 45px;
+    
+    --l0-border: rgba(27,31,36,0.06);
+    --textarea-bg: #f6f8fa;
+    --textarea-color: #24292f;
 }
 
+/* =========================================
+   2. 跟随系统：深色 (GitHub Dark)
+   ========================================= */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #0d1117;
+        --panel-bg: #161b22;
+        --border-color: #30363d;
+        --text-color: #e6edf3;
+        --subtitle-color: #c9d1d9;
+        --accent-color: #58a6ff;
+        --btn-bg: #238636;
+        --btn-hover: #2ea043;
+        
+        /* 深色格子（提亮版） */
+        --l0: #21262d; 
+        --l1: #0e4429;
+        --l2: #006d32;
+        --l3: #26a641;
+        --l4: #39d353;
+        
+        --l0-border: #30363d;
+        --textarea-bg: #0d1117;
+        --textarea-color: #7ee787;
+    }
+}
+
+/* =========================================
+   3. 基础布局与样式
+   ========================================= */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--bg-color); /* 自动使用变量 */
+    color: var(--text-color); /* 自动使用变量 */
     line-height: 1.5;
     padding: 40px 20px;
+    transition: background-color 0.3s, color 0.3s; /* 切换时丝滑过渡 */
 }
 
 .container { max-width: 1100px; margin: 0 auto; }
 header { text-align: center; margin-bottom: 30px; }
 h1 { color: var(--accent-color); font-size: 24px; }
-.subtitle { color: #8b949e; font-size: 14px; }
+.subtitle { color: var(--subtitle-color); font-size: 14px; }
 
 .controls {
     display: flex;
@@ -42,11 +82,12 @@ h1 { color: var(--accent-color); font-size: 24px; }
     border-radius: 8px;
     border: 1px solid var(--border-color);
     margin-bottom: 20px;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 select {
     background: var(--bg-color);
-    color: white;
+    color: var(--text-color);
     border: 1px solid var(--border-color);
     padding: 5px 10px;
     border-radius: 4px;
@@ -54,9 +95,9 @@ select {
     font-size: 16px;
 }
 
-.legend-text { font-size: 13px; color: #8b949e; }
+.legend-text { font-size: 13px; color: var(--subtitle-color); }
 
-/* 热力图外层容器 */
+/* 热力图外层 */
 .heatmap-wrapper {
     background: var(--panel-bg);
     padding: 20px;
@@ -64,45 +105,26 @@ select {
     border: 1px solid var(--border-color);
     margin-bottom: 20px;
     display: block; 
-    overflow-x: auto; /* 保证超出屏幕时才出现滚动条 */
+    overflow-x: auto;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
-/* 核心布局内容 */
-.heatmap-content {
-    width: max-content;
-    margin: 0 auto; /* 居中 */
-}
+.heatmap-content { width: max-content; margin: 0 auto; }
 
 /* 月份行 */
-.months-row {
-    display: flex;
-    margin-bottom: 8px;
-    height: 20px;
-}
-
-.empty-corner {
-    width: var(--label-width);
-    flex-shrink: 0;
-}
-
-.months-container {
-    position: relative;
-    flex-grow: 1;
-}
-
+.months-row { display: flex; margin-bottom: 8px; height: 20px; }
+.empty-corner { width: var(--label-width); flex-shrink: 0; }
+.months-container { position: relative; flex-grow: 1; }
 .month-label {
     position: absolute;
     bottom: 0;
     font-size: 12px;
-    color: #8b949e;
-    text-align: center; /* 关键：让文字在自己的宽度内居中 */
-    /* 删除之前的 transform: translateX(-3px); */
+    color: var(--subtitle-color);
+    text-align: center;
 }
 
 /* 底部网格行 */
-.bottom-row {
-    display: flex;
-}
+.bottom-row { display: flex; }
 
 .days-labels {
     width: var(--label-width);
@@ -110,13 +132,12 @@ select {
     display: grid;
     grid-template-rows: repeat(7, var(--cell-size));
     gap: var(--cell-gap);
-    font-size: 11px;
-    color: #8b949e;
+    font-size: 12px;
+    color: var(--subtitle-color);
     padding-right: 8px;
     text-align: right;
 }
 
-/* 修复核心：必须指定 7 行！ */
 .heatmap {
     display: grid;
     grid-template-rows: repeat(7, var(--cell-size));
@@ -135,21 +156,38 @@ select {
 
 .day:hover {
     transform: scale(1.3);
-    box-shadow: 0 0 5px rgba(255,255,255,0.3);
+    box-shadow: 0 0 5px rgba(128,128,128,0.5);
     z-index: 10;
 }
 
-.l0 { background-color: var(--l0); border: 1px solid rgba(255,255,255,0.05); }
+/* 颜色填充 */
+.l0 { background-color: var(--l0); border: 1px solid var(--l0-border); }
 .l1 { background-color: var(--l1); }
 .l2 { background-color: var(--l2); }
 .l3 { background-color: var(--l3); }
 .l4 { background-color: var(--l4); }
 
-button { background-color: var(--btn-bg); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; width: 100%; max-width: 300px; display: block; margin: 0 auto 20px auto; transition: background 0.2s; }
+/* 按钮 */
+button { background-color: var(--btn-bg); color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; width: 100%; max-width: 300px; display: block; margin: 0 auto 20px auto; transition: background 0.2s; }
 button:hover { background-color: var(--btn-hover); }
+
+/* 代码输出区 */
 .output-container { display: none; }
 .output-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .output-header h2 { font-size: 16px; color: var(--text-color); }
-#copyBtn { width: auto; margin: 0; padding: 6px 12px; font-size: 12px; background-color: #21262d; border: 1px solid var(--border-color); }
-#copyBtn:hover { background-color: #30363d; }
-textarea { width: 100%; height: 300px; background: var(--bg-color); color: #7ee787; border: 1px solid var(--border-color); border-radius: 6px; padding: 15px; font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; resize: vertical; }
+#copyBtn { width: auto; margin: 0; padding: 6px 12px; font-size: 12px; background-color: var(--panel-bg); color: var(--text-color); border: 1px solid var(--border-color); }
+#copyBtn:hover { background-color: var(--border-color); }
+
+textarea {
+    width: 100%;
+    height: 300px;
+    background: var(--textarea-bg);
+    color: var(--textarea-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 15px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    resize: vertical;
+    transition: background-color 0.3s, color 0.3s;
+}

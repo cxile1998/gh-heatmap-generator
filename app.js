@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const startDayOfWeek = startDate.getDay(); 
         const totalWeeks = Math.ceil((startDayOfWeek + totalDays) / 7);
 
-        const cellSize = 14;
-        const cellGap = 3;
+        const cellSize = 15;
+        const cellGap = 4;
         const totalWidth = totalWeeks * (cellSize + cellGap) - cellGap;
         monthsContainer.style.width = `${totalWidth}px`;
 
