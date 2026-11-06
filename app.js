@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heatmap = document.getElementById('heatmap');
     const monthsContainer = document.getElementById('monthsContainer');
     const generateBtn = document.getElementById('generateBtn');
+    const clearBtn = document.getElementById('clearBtn');
     const outputArea = document.getElementById('output');
     const outputContainer = document.querySelector('.output-container');
     const copyBtn = document.getElementById('copyBtn');
@@ -168,6 +169,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     yearSelect.addEventListener('change', renderGraph);
     generateBtn.addEventListener('click', generateBashScript);
+
+    // 清空逻辑
+    clearBtn.addEventListener('click', () => {
+        // 弹出确认框，防止手滑点错
+        if (confirm("Are you sure you want to clear all selections?")) {
+            commitData = {}; // 清空内存中的数据
+            localStorage.removeItem('gh-heatmap-data'); // 清空本地存储
+            renderGraph(); // 重新渲染空白网格
+            outputContainer.style.display = 'none'; // 把底部的输出框隐藏掉
+        }
+    });
 
     copyBtn.addEventListener('click', () => {
         outputArea.select();
