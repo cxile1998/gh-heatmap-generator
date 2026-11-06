@@ -168,14 +168,78 @@ select {
 .l4 { background-color: var(--l4); }
 
 /* 按钮 */
-button { background-color: var(--btn-bg); color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; width: 100%; max-width: 300px; display: block; margin: 0 auto 20px auto; transition: background 0.2s; }
-button:hover { background-color: var(--btn-hover); }
+/* =========================================
+   4. 按钮区域
+   ========================================= */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* 按钮之间的间距 */
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+/* 绿色的主按钮 */
+button.primary {
+    background-color: var(--btn-bg);
+    color: #ffffff;
+    min-width: 250px;
+}
+
+button.primary:hover {
+    background-color: var(--btn-hover);
+}
+
+/* 红色的危险/清除按钮 */
+button.danger {
+    background-color: transparent;
+    color: #cf222e; /* GitHub 红色 */
+    border-color: rgba(207, 34, 46, 0.4);
+}
+
+button.danger:hover {
+    background-color: #cf222e;
+    color: #ffffff;
+    border-color: #cf222e;
+}
+
+/* 暗黑模式下的红色调整 */
+@media (prefers-color-scheme: dark) {
+    button.danger {
+        color: #f85149;
+        border-color: rgba(248, 81, 73, 0.4);
+    }
+    button.danger:hover {
+        background-color: #da3633;
+        color: #ffffff;
+        border-color: #da3633;
+    }
+}
 
 /* 代码输出区 */
 .output-container { display: none; }
 .output-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .output-header h2 { font-size: 16px; color: var(--text-color); }
-#copyBtn { width: auto; margin: 0; padding: 6px 12px; font-size: 12px; background-color: var(--panel-bg); color: var(--text-color); border: 1px solid var(--border-color); }
+/* 复制按钮 */
+#copyBtn {
+    width: auto; 
+    margin: 0; 
+    padding: 6px 12px; 
+    font-size: 12px; 
+    background-color: var(--panel-bg); 
+    color: var(--text-color); 
+    border: 1px solid var(--border-color); 
+    border-radius: 6px;
+}
 #copyBtn:hover { background-color: var(--border-color); }
 
 textarea {
