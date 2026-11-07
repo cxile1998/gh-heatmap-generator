@@ -22,27 +22,35 @@ Many developers try to generate fake contribution graphs using simple scripts li
 2. **Timezone Shift:** Specifying a date without a time (or defaulting to `00:00:00`) might shift the contribution block to the previous or next day due to UTC offset calculations.
 3. **Dual Timestamps:** Git maintains both `AuthorDate` and `CommitDate`. If they are not synchronized, GitHub's public caching system might ignore the historical date.
 
-## Features
+## 🛠️ Features
 
-* **Visual Interface:** Click on a 7x53 grid to paint your contribution graph.
-* **Accurate Month Alignment:** Real-time rendering of month labels that perfectly align with the weeks.
-* **Smart Script Generation:** Generates optimized Bash scripts using Bash functions and `for` loops, keeping the script concise.
-* **Timezone Safe:** Hardcodes `T12:00:00` to the generated dates to bypass UTC boundary issues.
-* **Real Diffs:** Generates scripts that modify a dummy `activity.txt` file to ensure the commits are counted as "real" contributions.
+- **Visual Interface:** A clickable 7x53 grid to easily paint and visualize your contribution graph.
+- **Right-Click to Clear:** Left-click to cycle commit intensity (0-4), and right-click to instantly clear a specific cell for quick edits.
+- **Accurate Month Alignment:** Real-time rendering of month labels that perfectly align and center with the spanned weeks.
+- **Smart Script Generation:** Generates highly optimized Bash scripts using native functions and `for` loops, keeping the output concise and readable.
+- **Timezone Safe:** Hardcodes `T12:00:00` to the generated dates to safely bypass UTC boundary issues across different platforms.
+- **Real Diffs:** Generates scripts that modify a dummy `activity.txt` file, ensuring the commits are counted as "real" contributions by GitHub's public API.
+- **Auto Dark/Light Mode:** The user interface automatically adapts to your operating system's color scheme (GitHub Light/Dark themes).
+- **One-Click Clear:** Easily reset the entire graph with the "Clear Graph" button to start fresh.
 
-## How to Use
+<div align="center">
+  <img src="assets/preview-dark.png" width="48%" alt="Dark Mode" />
+  <img src="assets/preview-light.png" width="48%" alt="Light Mode" />
+</div>
+
+## 🚀 How to Use
 
 1. Clone this repository or download the source files (`index.html`, `style.css`, `app.js`).
 2. Open `index.html` in any modern web browser (No local server or Node.js required).
-3. Select the target year, click on the grid to select dates and commit intensity (0 to 4).
-4. Click **"Generate Git Commit Commands"**.
-5. **Copy the generated Bash script from the output box.**
+3. Select the target year from the dropdown, **left-click** on the grid to select dates and commit intensity (0 to 4), or **right-click** to quickly clear a cell.
+4. Click the **"Generate Git Commit Commands"** button.
+5. Click **"Copy to Clipboard"** to copy the generated Bash script.
 6. Create a new file named `script.sh` in your local Git repository, paste the copied code, and save it.
-7. Run the script in your local Git terminal:
+7. Run the script in your local Git terminal and push:
 
 ```bash
-   bash script.sh
-   git push origin main
+bash script.sh
+git push origin main
 ```
 
 ## Contributing

@@ -242,6 +242,38 @@ button.danger:hover {
 }
 #copyBtn:hover { background-color: var(--border-color); }
 
+/* =========================================
+   5. 自定义滚动条 (Webkit 内核)
+   ========================================= */
+
+/* 针对文本框的滚动条 */
+textarea::-webkit-scrollbar {
+    width: 10px; /* 滚动条宽度 */
+}
+
+/* 隐藏滚动条两端的上下箭头按钮（就是你觉得最突兀的那个） */
+textarea::-webkit-scrollbar-button {
+    display: none; 
+}
+
+/* 滚动条的轨道（背景） */
+textarea::-webkit-scrollbar-track {
+    background: var(--textarea-bg); 
+    border-radius: 0 6px 6px 0;
+}
+
+/* 滚动条的滑块（拖动的部分） */
+textarea::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 5px;
+    border: 2px solid var(--textarea-bg); /* 制造一点间隙感 */
+}
+
+/* 鼠标悬停在滑块上时的颜色 */
+textarea::-webkit-scrollbar-thumb:hover {
+    background: #8b949e;
+}
+
 textarea {
     width: 100%;
     height: 300px;
@@ -254,4 +286,9 @@ textarea {
     font-size: 13px;
     resize: vertical;
     transition: background-color 0.3s, color 0.3s;
+}
+
+/* 用边框色填满右下角小方格 */
+textarea::-webkit-resizer {
+    background-color: var(--border-color); 
 }

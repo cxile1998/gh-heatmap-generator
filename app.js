@@ -113,6 +113,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('gh-heatmap-data', JSON.stringify(commitData));
             });
 
+            // --- 新增：鼠标右键点击清除 ---
+            dayEl.addEventListener('contextmenu', (e) => {
+                e.preventDefault(); // 阻止浏览器默认的右键菜单弹出
+                
+                // 如果这个格子有数据，才执行清空
+                if (commitData[dateStr]) {
+                    delete commitData[dateStr];
+                    
+                    // 恢复到 0 级样式
+                    dayEl.className = `day ${levelColors[0]}`;
+                    dayEl.title = `${dateStr} (0 commits)`;
+                    localStorage.setItem('gh-heatmap-data', JSON.stringify(commitData));
+                }
+            });
+
             heatmap.appendChild(dayEl);
         }
     }
